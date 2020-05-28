@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from posts.serializers import PostSerializer
 from .models import User
 
 
@@ -26,3 +27,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user.refresh = str(refresh)
         user.access = str(refresh.access_token)
         return user
+
+
+class UserSerializer(serializers.ModelSerializer):
+    posts = PostSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = ['username', 'posts']
