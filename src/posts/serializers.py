@@ -8,11 +8,11 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'username', 'content', 'created_on']
+        fields = ['id', 'username', 'post', 'created_on']
 
     def save(self, **kwargs):
         """
-        Update author inform base on request.user before save
+        Update author information based on request before saving
         """
         self._validated_data['author'] = self.context['request'].user
         return super().save(**kwargs)

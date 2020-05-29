@@ -8,7 +8,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-    content = models.TextField()
+    post = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
