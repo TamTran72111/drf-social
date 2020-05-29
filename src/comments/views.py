@@ -29,5 +29,6 @@ def likeComment(request, *args, **kwargs):
         comment = Comment.like(id, user)
     else:
         comment = Comment.unlike(id, user)
-    serializer = CommentSerializer(comment)
+    context = {'request': request}
+    serializer = CommentSerializer(comment, context=context)
     return Response(serializer.data)

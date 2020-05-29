@@ -26,5 +26,6 @@ def likePost(request, *args, **kwargs):
         post = Post.like(id, user)
     else:
         post = Post.unlike(id, user)
-    serializer = PostSerializer(post)
+    context = {'request': request}
+    serializer = PostSerializer(post, context=context)
     return Response(serializer.data)
