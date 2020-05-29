@@ -5,7 +5,7 @@ from rest_framework.routers import DefaultRouter
 from .views import CommentViewset, likeComment
 
 router = DefaultRouter()
-router.register('', CommentViewset)
+router.register('', CommentViewset, 'post-comment')
 
 urlpatterns = [
     path('like/<int:id>/', likeComment, name='comment-like'),

@@ -9,9 +9,12 @@ from .models import Comment
 
 
 class CommentViewset(ModelViewSet):
-    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [IsAuthorOrReadOnly]
+
+    def get_queryset(self):
+        post_id = self.kwargs['post_id']
+        return Comment.objects.filter(post__id=post_id)
 
 
 @api_view(['POST', 'DELETE'])
