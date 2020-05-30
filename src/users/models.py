@@ -42,6 +42,7 @@ class User(AbstractUser):
         Returns:
             bool: True if the current user already liked obj. False otherwise.
         """
+        object_id = obj.id
         if not isinstance(obj, ContentType):
             obj = ContentType.objects.get_for_model(obj)
-        return self.likes.filter(content_type=obj).count() > 0
+        return bool(self.likes.filter(content_type=obj, object_id=object_id))
